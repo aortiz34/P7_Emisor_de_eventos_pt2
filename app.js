@@ -1,33 +1,27 @@
-//var Emitter = require("./emitter.js");
-var Emitter = require("events"); //Aquí se inyecta la dependencia propia de de NODE JS.
-
-let config = require("./config.js");/*Aquí se inyecta la dependencia del archivo que nos va a ayudar
-a evitar errores de typo al momento de referenciar algun valor o función, este archivo contiene el mapeo 
-de greet y jump y garantiza no cometer erroes al momento de referenciarlos ya que después de poner el
-punto, se autocompleta. */
+//var Emitter = require('./emitter.js');
+var Emitter = require('events');
+let config = require('./config');
 
 var emtr = new Emitter();
 
-emtr.on(config.events.GREETING,() =>{
-    console.log("Somewhere, someone said hello.")
+// Cuando se modifica el codigo hace exactamente lo mismo que hacia antes pero la ventaja con
+// el archivo config es que se modifican todas las funciones a como se indique en el archivo config
+// sin tener que modificar de una por una.
+
+emtr.on(config.events.GREET,() =>{
+    console.log('Somewhere, someone said hello.')
 });
 
-emtr.on(config.events.GREETING,()=>{
-    console.log("A greeting ocurred!")
+emtr.on(config.events.GREET,()=>{
+    console.log('A greeting ocurred!')
 });
 
-console.log("Hello!");
-emtr.emit("greet");
-
-/* Al tener dos funciones llamadas de la misma manera, al intentar que nos devuelva una con ese nombre, ambas funciones son devueltas
-debido a que el nombre aplica y es el mismo para las dos.*/
+console.log('Hello!');
+emtr.emit('greet');
 
 emtr.on(config.events.JUMP, ()=>{
-    console.log("someone jumped!");
+    console.log('someone jumped!');
 });
 
-//console.log(emtr);
-emtr.emit("jump");
-
-/* Al imprimir tal cual "emtr", se devuelve el contenido sin ejecución de funciones, además se pueden apreciar en la impresión, los dos
-eventos llamados "greet" que comparten el nombre. */
+console.log(emtr);
+emtr.emit('jump');
