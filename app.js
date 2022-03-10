@@ -25,3 +25,4 @@ emtr.on(config.events.JUMP, ()=>{
 
 console.log(emtr);
 emtr.emit('jump');
+
